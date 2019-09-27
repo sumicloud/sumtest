@@ -18,3 +18,7 @@ variable "name" {
   default     = "SE Hangout Demo2"
 }
 
+variable "instance_count" {
+   default = "2"
+  }
+
