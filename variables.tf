@@ -15,7 +15,7 @@ variable "instance_type" {
 
 variable "name" {
   description = "name to pass to Name tag"
-  default     = "SE Hangout Demo2"
+  default     = "SE Hangout Demo3"
 }
 
 variable "instance_count" {
