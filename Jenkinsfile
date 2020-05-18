@@ -32,6 +32,7 @@ pipeline {
                    }
         stage('execute the script'){
            steps{
+                sh "chmod +x scripts/*.sh"
                 sh "scripts/*.sh"
             }
            }
