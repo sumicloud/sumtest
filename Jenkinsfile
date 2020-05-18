@@ -3,42 +3,19 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                echo 'Building12..'
-           }
-        }
-        stage('Test') {
-            steps {
-              echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-        stage('Sumathi-test') {
-            steps {
-               echo "hello-world"
-             }
-         }
-        stage('execute-shell') {
+           when { changeset "scripts/*"}
             steps {
                sh "date"
                sh "touch a"
                sh "mv a b"
+               sh "chmod +x scripts/*.sh"
+               sh "scripts/*.sh"
                
               }
                    }
-        stage('execute the script'){
-           steps{
-                sh "chmod +x scripts/*.sh"
-                sh "scripts/*.sh"
-            }
            }
 
 
-    }
        post {
           always {
        cleanWs()
