@@ -25,11 +25,10 @@ pipeline {
         
         stage('execute-shell') {
             steps {
-               sh """
-                  date
-                  touch a
-                  mv a b
-                """
+               sh "date"
+               sh "touch a"
+               sh "mv a b"
+               
               }
                    }
     }
