@@ -22,5 +22,13 @@ pipeline {
                echo "hello-world"
              }
          }
+        
+        stage('execute-shell') {
+            steps {
+               bash '''#!/bin/bash
+                  date
+                '''
+              }
+                   }
     }
 }
