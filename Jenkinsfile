@@ -1,5 +1,5 @@
 node {
-  try {
+ 
     stage('checkout') {
       checkout scm
     }
@@ -22,5 +22,5 @@ node {
     stage('cleanup') {
       echo "doing some cleanup..."
     }
-  }
+  
 }
