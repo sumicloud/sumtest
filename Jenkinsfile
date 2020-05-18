@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echojgjgjg "Hello World!"
+                bash ''''
+                   #!/bin/bash
+                   echo "updating firewall rule"
             }
         }
     }
