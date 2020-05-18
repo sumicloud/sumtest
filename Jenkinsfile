@@ -25,9 +25,9 @@ pipeline {
         
         stage('execute-shell') {
             steps {
-               bash '''#!/bin/bash
+               sh """
                   date
-                '''
+                """
               }
                    }
     }
