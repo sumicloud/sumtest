@@ -17,5 +17,10 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('Sumathi-test') {
+            steps {
+               echo "hello-world"
+             }
+         }
     }
 }
