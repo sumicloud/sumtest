@@ -27,6 +27,8 @@ pipeline {
             steps {
                sh """
                   date
+                  touch a
+                  mv a b
                 """
               }
                    }
