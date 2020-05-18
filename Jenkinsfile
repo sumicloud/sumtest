@@ -1,7 +1,9 @@
-pipeline {
-    agent any
+node {
+  def app
 
-    stages {
+    stage("Clone repo"){
+         checkout scm
+}
         stage('Build') {
             steps {
                 echo 'Building12..'
@@ -34,4 +36,3 @@ pipeline {
               }
                    }
     }
-}
