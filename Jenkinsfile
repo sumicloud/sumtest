@@ -6,6 +6,7 @@ pipeline {
                 bash ''''
                    #!/bin/bash
                    echo "updating firewall rule"
+                   date
             }
         }
     }
