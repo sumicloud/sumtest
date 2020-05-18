@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    stages {
+     stage('scripted'){
+   steps {
 def changeLogSets = currentBuild.changeSets
 for (int i = 0; i < changeLogSets.size(); i++) {
     def entries = changeLogSets[i].items
@@ -14,9 +17,9 @@ for (int i = 0; i < changeLogSets.size(); i++) {
         }
     }
 }
+}
+}
 
-
-    stages {
         stage('Build') {
            when { changeset "scripts/*"}
             steps {
@@ -28,13 +31,12 @@ for (int i = 0; i < changeLogSets.size(); i++) {
                
               }
                    }
-           }
 
-
+}
        post {
           always {
        cleanWs()
 }   
 }
- 
-}
+} 
+
