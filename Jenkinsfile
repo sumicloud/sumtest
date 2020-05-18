@@ -1,12 +1,20 @@
 pipeline {
-    agent { label 'master' }
+    agent any
+
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                bash ''''
-                   #!/bin/bash
-                   echo "updating firewall rule"
-                   date
+                echo 'Building..'
+           }
+        }
+        stage('Test') {
+            steps {
+              echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
