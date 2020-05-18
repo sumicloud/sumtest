@@ -24,12 +24,15 @@ pipeline {
          }
         
         stage('docker-build'){
+          steps {
           docker.image('ubuntu1804').withRun('-d=true -p 8888:8080') {c ->
             docker.image('ubuntu1804').inside{
                /*  Do something here inside container  */
                sh "ls"
             }
         } 
+
+        }
         }
 
         stage('execute-shell') {
