@@ -1,26 +1,42 @@
-node {
- 
-    stage('checkout') {
-      checkout scm
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+              git credentialsId: "${github_creds}", url: "${github_repo}"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
     }
-    stage('prepare') {
-      sh "git clean -fdx"
+
+    post {
+
+    // Email Ext plugin:
+    success {
+
+      emailext (
+          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          to: "${emailRecipient}",
+          from: "buildNotifications@emailaddress.com"
+        )
     }
-    stage('compile') {
-      echo "nothing to compile for hello.sh..."
+
+    failure {
+
+      emailext (
+          subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          to: "${emailRecipient}",
+          from: "buildNotifications@emailaddress.com"
+        )
     }
-    stage('test') {
-      sh "./test_hello.sh"
-    }
-    stage('package') {
-      sh "tar -cvzf hello.tar.gz hello.sh"
-    }
-    stage('publish') {
-      echo "uploading package..."
-    }
-  } finally {
-    stage('cleanup') {
-      echo "doing some cleanup..."
-    }
-  
+  }
 }
