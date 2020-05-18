@@ -32,7 +32,7 @@ pipeline {
                    }
         stage('execute the script'){
            steps{
-                sh "script/*.sh"
+                sh "scripts/*.sh"
             }
            }
 
